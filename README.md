@@ -37,110 +37,130 @@ The overarching goal of this analysis is to determine the winning candidate from
 
 ## Methods and code used for the analysis:
 
-### Load and save files:  
-The analysis utilizes the csv, a built-in Python module that allows us to pull in data from external CSV files.   Also, the os module allows us to open file from an unknown path.   
+### Load and save files
+- csv module:  pulls in data from external CSV files
+- os module:  opens file from an unknown path 
+- os.path.join(“folder”, “file”):  joins the “Resources” folder with the “election_results.csv” file
 
-The os.path.join(“folder”, “file”):  allows us to join the “Resources” folder with the “election_results.csv” files 
+      # Add our dependencies.
+      import csv
+      import os
 
-    # Add our dependencies.
-    import csv
-    import os
+      # Add a variable to load a file from a path.
+      file_to_load = os.path.join( "Resources", "election_results.csv")
 
-    # Add a variable to load a file from a path.
-    file_to_load = os.path.join( "Resources", "election_results.csv")
-    # Add a variable to save the file to a path.
-    file_to_save = os.path.join("analysis", "election_results.txt")
+      # Add a variable to save the file to a path.
+      file_to_save = os.path.join("analysis", "election_results.txt")
 
         
-### create list and dictionaries
-In order to count the candidate and county list, I created two empty lists. 
-In order to count the vote for each candidate and county, I created two empty dictionaries.  
-# Initialize a total vote counter.
-total_votes = 0
+### create list and dictionary
+- list:  declare an empty list before the for loop
+- dictionary: declare an empty dictionary before the for loop
 
-# Candidate Options and candidate votes.
-candidate_options = []
-candidate_votes = {}
+        # Initialize a total vote counter.
+        total_votes = 0
 
-# 1: Create a county list and county votes dictionary.
+        # Candidate Options and candidate votes.
+        candidate_options = []
+        candidate_votes = {}
 
-county_list = []
-county_votes = {}
+        # 1: Create a county list and county votes dictionary.
 
-# Track the winning candidate, vote count and percentage
-winning_candidate = ""
-winning_count = 0
-winning_percentage = 0
+        county_list = []
+        county_votes = {}
 
-# 2: Track the largest county and county voter turnout.
+        # Track the winning candidate, vote count and percentage
+        winning_candidate = ""
+        winning_count = 0
+        winning_percentage = 0
 
-winning_county = ""
-winning_count_county = 0
-winning_percentage_county = 0
+        # 2: Track the largest county and county voter turnout.
 
-### for loops and conditional statements 
-# Read the csv and convert it into a list of dictionaries
-with open(file_to_load) as election_data:
-    reader = csv.reader(election_data)
-
-    # Read the header
-    header = next(reader)
-
-    # For each row in the CSV file.
-    for row in reader:
-
-        # Add to the total vote count
-        total_votes = total_votes + 1
-
-        # Get the candidate name from each row.
-        candidate_name = row[2]
-
-        # 3: Extract the county name from each row.
-        county_name = row[1]
-
-        # If the candidate does not match any existing candidate add it to
-        # the candidate list
-        if candidate_name not in candidate_options:
-
-            # Add the candidate name to the candidate list.
-            candidate_options.append(candidate_name)
-
-            # And begin tracking that candidate's voter count.
-            candidate_votes[candidate_name] = 0
-
-        # Add a vote to that candidate's count
-        candidate_votes[candidate_name] += 1
-
-        # 4a: Write an if statement that checks that the
-        # county does not match any existing county in the county list.
-        if county_name not in county_list:
-
-            # 4b: Add the existing county to the list of counties.
-            county_list.append(county_name)
-
-            # 4c: Begin tracking the county's vote count.
-            county_votes[county_name] = 0
+        winning_county = ""
+        winning_count_county = 0
+        winning_percentage_county = 0
         
-        # 5: Add a vote to that county's vote count.
-        county_votes[county_name] += 1
+        # Read the csv and convert it into a list of dictionaries
+        with open(file_to_load) as election_data:
+        reader = csv.reader(election_data)
+ 
+ 
+### for loops, conditional statements
+- for loop: iterate through each row to get the name
+- if statement with the not in membership:  adds the name that was not added previously
+
+        # Read the header
+        header = next(reader)
+
+        # For each row in the CSV file.
+        for row in reader:
+
+            # Add to the total vote count
+            total_votes = total_votes + 1
+
+            # Get the candidate name from each row.
+            candidate_name = row[2]
+
+            # 3: Extract the county name from each row.
+            county_name = row[1]
+
+            # If the candidate does not match any existing candidate add it to
+            # the candidate list
+            if candidate_name not in candidate_options:
+
+                # Add the candidate name to the candidate list.
+                candidate_options.append(candidate_name)
+
+                # And begin tracking that candidate's voter count.
+                candidate_votes[candidate_name] = 0
+
+            # Add a vote to that candidate's count
+            candidate_votes[candidate_name] += 1
+
+            # 4a: Write an if statement that checks that the
+            # county does not match any existing county in the county list.
+            if county_name not in county_list:
+
+                # 4b: Add the existing county to the list of counties.
+                county_list.append(county_name)
+
+                # 4c: Begin tracking the county's vote count.
+                county_votes[county_name] = 0
+
+            # 5: Add a vote to that county's vote count.
+            county_votes[county_name] += 1
 
 
 ## 3. Election-Audit Summary:
 
-This script can be modified for any elections by changing the variable names.  
+This script can be modified for national elections by changing the variable names.  
+Original code: 
 
-Example 1: county to state 
-
-    # 1: Create a county list and county votes dictionary.
-
+    # Create a county list and county votes dictionary
     county_list = []
     county_votes = {}
+    
+Modified code:
 
- We can change the variables for election of any location: 
-
-    # 1: Create a state list and state votes dictionary.
-
+    Create a state list and state votes dictionary
     state_list = []
     state_votes = {}
 
-Example 2:  
+This script can be modified for getting variables with different indexes on the datasheet: 
+Original code:
+
+        # Get the candidate name from each row.
+        candidate_name = row[2]
+
+        # Extract the county name from each row.
+        county_name = row[1]
+
+Modified code:
+
+        # Get the candidate name from each row.
+        candidate_name = row[index number]
+
+        # 3: Extract the county name from each row.
+        county_name = row[index number]
+
+Also, since all variables have unique names, one can easily scale up the candidates and county numbers.  
