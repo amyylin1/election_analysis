@@ -30,7 +30,11 @@ The overarching goal of this analysis is to determine the winning candidate from
 
   •	Diane DeGette won the election with 272,892 votes, which accounts for 73.8 % of the total votes. 
 
-### Election Summary  
+### The election results printed to the command line (image)
+
+<img width="544" alt="Screen Shot 2022-08-16 at 8 27 36 PM" src="https://user-images.githubusercontent.com/108419097/185007695-f69ea9c6-59e3-41e7-bbb3-b0d2fb5b0c0a.png">
+
+### The election results saved to a text file (image)
 
 <img width="365" alt="Screen Shot 2022-08-16 at 7 06 04 PM" src="https://user-images.githubusercontent.com/108419097/185000218-095c6381-fb7f-4d64-a096-640ba6e75f94.png">
 
