@@ -133,7 +133,7 @@ The overarching goal of this analysis is to determine the winning candidate from
 
 ## 3. Election-Audit Summary:
 
-This script can be modified for national elections by changing the variable names.  
+This script can be modified for national election by changing the variable names.  
 Original code: 
 
     # Create a county list and county votes dictionary
